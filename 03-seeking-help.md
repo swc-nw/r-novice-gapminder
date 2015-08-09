@@ -140,6 +140,17 @@ your issue.
 
 > #### Challenge 1 {.challenge}
 > 
+> Look at the help for the `c` function. What do you expect will
+> happen if you evaluate the following: 
+> 
+> ~~~{.r}
+> c(1, 2, 3)
+> c('d', 'e', 'f')
+> c(1, 2, 'f')`
+> ~~~
+
+> #### Challenge 2 {.challenge}
+> 
 > Look at the help for the `paste` function. You'll need to use this later. 
 > What is the difference between the `sep` and `collapse` arguments?
 > 
@@ -152,7 +163,15 @@ your issue.
 
 ## Challenge solutions
 
-> #### Solution to challenge 1 {.challenge}
+> #### Solution to Challenge 1 {.challenge}
+>
+> The `c()` function creates a vector, in which all elements are the
+> same type. In the first case, the elements are numeric, in the
+> second, they are characters, and in the third they are characters:
+> the numeric values "coerced" to be characters.
+>
+
+> #### Solution to Challenge 2 {.challenge}
 > 
 > Look at the help for the `paste` function. You'll need to use this later. 
 > 

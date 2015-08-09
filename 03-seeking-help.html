@@ -109,6 +109,17 @@ loaded via a namespace (and not attached):
 <h4 id="challenge-1"><span class="glyphicon glyphicon-pencil"></span>Challenge 1</h4>
 </div>
 <div class="panel-body">
+<p>Look at the help for the <code>c</code> function. What do you expect will happen if you evaluate the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)
+<span class="kw">c</span>(<span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>, <span class="st">&#39;f&#39;</span>)
+<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="st">&#39;f&#39;</span>)<span class="st">`</span></code></pre></div>
+</div>
+</section>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h4 id="challenge-2"><span class="glyphicon glyphicon-pencil"></span>Challenge 2</h4>
+</div>
+<div class="panel-body">
 <p>Look at the help for the <code>paste</code> function. You’ll need to use this later. What is the difference between the <code>sep</code> and <code>collapse</code> arguments?</p>
 </div>
 </section>
@@ -121,7 +132,15 @@ loaded via a namespace (and not attached):
 <h2 id="challenge-solutions">Challenge solutions</h2>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
-<h4 id="solution-to-challenge-1"><span class="glyphicon glyphicon-pencil"></span>Solution to challenge 1</h4>
+<h4 id="solution-to-challenge-1"><span class="glyphicon glyphicon-pencil"></span>Solution to Challenge 1</h4>
+</div>
+<div class="panel-body">
+<p>The <code>c()</code> function creates a vector, in which all elements are the same type. In the first case, the elements are numeric, in the second, they are characters, and in the third they are characters: the numeric values “coerced” to be characters.</p>
+</div>
+</section>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h4 id="solution-to-challenge-2"><span class="glyphicon glyphicon-pencil"></span>Solution to Challenge 2</h4>
 </div>
 <div class="panel-body">
 <p>Look at the help for the <code>paste</code> function. You’ll need to use this later.</p>
