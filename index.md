@@ -48,3 +48,4 @@ usability.
 
 *   [Reference](reference.html)
 *   [Instructor's Guide](instructors.html)
+*   [GapMinder package on CRAN](https://cran.r-project.org/web/package=gapminder)
