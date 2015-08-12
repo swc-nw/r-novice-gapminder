@@ -59,20 +59,24 @@ y:  6  7  8  9
 > it worked.
 >
 
-> #### Challenge 2 {.challenge}
+> #### Challenge 2 {.challenge} 
 >
-> Pick one country and plot population in millions against year.
+> On a single graph, plot population, in
+> millions, against year, for all countries (don't worry about
+>identifying which country is which)
 >
 
-Comparison operators also apply element-wise, as we saw in the
-subsetting lesson:
+Comparison operators, logical operators, and many function are also
+vectorized:
+
+
+**Comparison operators**
 
 ```{r}
 x > 2
 ```
 
-Logical operations are also vectorised:
-
+**Logical operators** 
 ```{r}
 a <- x > 3  
 a
@@ -84,25 +88,31 @@ a
 > `all()` will return `TRUE` if *all* elements of a vector are `TRUE`
 >
 
-Most functions also operate on element-wise on vectors:
+Most functions are lso operate on element-wise on vectors:
 
+**Functions**
 ```{r}
 x <- 1:4
 log(x)
 ```
 
-Vectorised operations also work element wise on matrices:
+Vectorised operations work element-wise on matrices:
 
 ```{r}
 m <- matrix(1:12, nrow=3, ncol=4)
-m * -1
+m * -1  
 ```
-A matrix in R 
+
 
 > #### Tip: element-wise vs. matrix multiplication {.callout}
 >
-> Note that `*` gives you element-wise multiplication!
+> Very important: the operator `*` gives you element-wise multiplication!
 > To do matrix multiplication, we need to use the `%*%` operator:
+> 
+> ```{r}
+> m %*% matrix(1, nrow=4, ncol=1)
+> matrix(1:4, nrow=1) %*% matrix(1:4, ncol=1)
+> ```
 >
 > For more on matrix algebra, see the [Quick-R reference
 > guide](http://www.statmethods.net/advstats/matrix.html)
@@ -164,7 +174,7 @@ A matrix in R
 > Refresh your ggplot skills by plotting population in millions against year.
 >
 > ```{r ch2-sol}
-> ggplot(gapminder, aes(x = year, y = pop_millions)) + geom_point()
+> plot(gapminder$year, gapminder$pop_millions)
 > ```
 >
 
@@ -214,11 +224,11 @@ A matrix in R
 > How about when n=10,000?
 >
 > ```{r}
+> sum(1/(1:100)^2)
+> sum(1/(1:1e04)^2)
+> 
 > inverse_sum_of_squares <- function(n) {
->   sequence <- 1:n
->   y <- 1/(sequence^2)
->   result <- sum(y)
->   return(result)
+>   sum(1/(1:n)^2)
 > }
 > inverse_sum_of_squares(100)
 > inverse_sum_of_squares(10000)
