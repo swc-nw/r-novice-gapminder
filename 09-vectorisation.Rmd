@@ -62,8 +62,11 @@ y:  6  7  8  9
 > #### Challenge 2 {.challenge} 
 >
 > On a single graph, plot population, in
-> millions, against year, for all countries (don't worry about
->identifying which country is which)
+> millions, against year, for all countries. Don't worry about
+>identifying which country is which.
+>
+> Repeat the exercise, graphing only for China, India, and
+>Indonesia. Again, don't worry about which is which.
 >
 
 Comparison operators, logical operators, and many function are also
@@ -78,7 +81,7 @@ x > 2
 
 **Logical operators** 
 ```{r}
-a <- x > 3  
+a <- x > 3  # or, for clarity, a <- (x > 3)
 a
 ```
 
@@ -102,7 +105,7 @@ Vectorised operations work element-wise on matrices:
 m <- matrix(1:12, nrow=3, ncol=4)
 m * -1  
 ```
-
+ 
 
 > #### Tip: element-wise vs. matrix multiplication {.callout}
 >
@@ -136,7 +139,7 @@ m * -1
 > Did you get the output expected? If not, ask a helper!
 >
 
-> #### Bonus Challenge {.challenge}
+> #### Challenge 4 {.challenge}
 >
 > We're interested in looking at the sum of the
 > following sequence of fractions:
@@ -147,8 +150,8 @@ m * -1
 >
 > This would be tedious to type out, and impossible for
 > high values of n.
-> Can you use vectorisation to solve for x, when n=100?
-> How about when n=10,000?
+>  Use vectorisation to compute x when n=100. What is the sum  
+> when n=10,000?
 >
 
 
@@ -175,6 +178,9 @@ m * -1
 >
 > ```{r ch2-sol}
 > plot(gapminder$year, gapminder$pop_millions)
+> countryset <- c('China', 'India', 'Indonesia')
+> y <- gapminder[gapminder$country %in% countryset, ]
+> plot(y$year, y$pop_millions)
 > ```
 >
 
@@ -209,7 +215,7 @@ m * -1
 > ```
 >
 
-> #### Bonus Challenge {.challenge}
+> ####  Challenge 4 {.challenge}
 >
 > We're interested in looking at the sum of the
 > following sequence of fractions:
@@ -234,3 +240,4 @@ m * -1
 > inverse_sum_of_squares(10000)
 > ```
 >
+
