@@ -12,10 +12,10 @@ minutes: 30
 > * To understand vectorised operations in R.
 >
 
-One of the nice features of R is that most of its functions are vectorised,
-that is the function will operate on all elements of a vector without
-needing to loop through and act on each element one at a time. This makes
-writing code more concise, easy to read, and less error prone.
+Most of R's functions are vectorised, meaning that the function will
+operate on all elements of a vector without needing to loop through
+and act on each element one at a time. This makes writing code more
+concise, easy to read, and less error prone.
 
 
 
@@ -70,13 +70,21 @@ y:  6  7  8  9
 > it worked.
 >
 
-> #### Challenge 2 {.challenge}
+> #### Challenge 2 {.challenge} 
 >
-> Refresh your ggplot skills by plotting population in millions against year.
+> On a single graph, plot population, in
+> millions, against year, for all countries. Don't worry about
+>identifying which country is which.
+>
+> Repeat the exercise, graphing only for China, India, and
+>Indonesia. Again, don't worry about which is which.
 >
 
-Comparison operators also apply element-wise, as we saw in the
-subsetting lesson:
+Comparison operators, logical operators, and many function are also
+vectorized:
+
+
+**Comparison operators**
 
 
 ~~~{.r}
@@ -90,11 +98,10 @@ x > 2
 
 ~~~
 
-Logical operations are also vectorised:
-
+**Logical operators** 
 
 ~~~{.r}
-a <- x > 3
+a <- x > 3  # or, for clarity, a <- (x > 3)
 a
 ~~~
 
@@ -111,8 +118,9 @@ a
 > `all()` will return `TRUE` if *all* elements of a vector are `TRUE`
 >
 
-Many functions also operate on element-wise on vectors:
+Most functions are lso operate on element-wise on vectors:
 
+**Functions**
 
 ~~~{.r}
 x <- 1:4
@@ -122,16 +130,16 @@ log(x)
 
 
 ~~~{.output}
-[1] 0.0000000 0.6931472 1.0986123 1.3862944
+[1] 0.000000 0.693147 1.098612 1.386294
 
 ~~~
 
-Vectorised operations also work element wise on matrices:
+Vectorised operations work element-wise on matrices:
 
 
 ~~~{.r}
 m <- matrix(1:12, nrow=3, ncol=4)
-m * -1
+m * -1  
 ~~~
 
 
@@ -143,11 +151,41 @@ m * -1
 [3,]   -3   -6   -9  -12
 
 ~~~
+ 
 
 > #### Tip: element-wise vs. matrix multiplication {.callout}
 >
-> Note that `*` gives you element-wise multiplication!
+> Very important: the operator `*` gives you element-wise multiplication!
 > To do matrix multiplication, we need to use the `%*%` operator:
+> 
+> 
+> ~~~{.r}
+> m %*% matrix(1, nrow=4, ncol=1)
+> ~~~
+> 
+> 
+> 
+> ~~~{.output}
+>      [,1]
+> [1,]   22
+> [2,]   26
+> [3,]   30
+> 
+> ~~~
+> 
+> 
+> 
+> ~~~{.r}
+> matrix(1:4, nrow=1) %*% matrix(1:4, ncol=1)
+> ~~~
+> 
+> 
+> 
+> ~~~{.output}
+>      [,1]
+> [1,]   30
+> 
+> ~~~
 >
 > For more on matrix algebra, see the [Quick-R reference
 > guide](http://www.statmethods.net/advstats/matrix.html)
@@ -177,11 +215,12 @@ m * -1
 > 1. `m ^ -1`
 > 2. `m * c(1, 0, -1)`
 > 3. `m > c(0, 20)`
+> 4. `m * c(1, 0, -1, 2)`
 >
 > Did you get the output expected? If not, ask a helper!
 >
 
-> #### Bonus Challenge {.challenge}
+> #### Challenge 4 {.challenge}
 >
 > We're interested in looking at the sum of the
 > following sequence of fractions:
@@ -193,8 +232,8 @@ m * -1
 >
 > This would be tedious to type out, and impossible for
 > high values of n.
-> Can you use vectorisation to solve for x, when n=100?
-> How about when n=10,000?
+>  Use vectorisation to compute x when n=100. What is the sum  
+> when n=10,000?
 >
 
 
@@ -219,26 +258,34 @@ m * -1
 > 
 > ~~~{.output}
 >       country year      pop continent lifeExp gdpPercap pop_millions
-> 1 Afghanistan 1952  8425333      Asia  28.801  779.4453     8.425333
-> 2 Afghanistan 1957  9240934      Asia  30.332  820.8530     9.240934
-> 3 Afghanistan 1962 10267083      Asia  31.997  853.1007    10.267083
-> 4 Afghanistan 1967 11537966      Asia  34.020  836.1971    11.537966
-> 5 Afghanistan 1972 13079460      Asia  36.088  739.9811    13.079460
-> 6 Afghanistan 1977 14880372      Asia  38.438  786.1134    14.880372
+> 1 Afghanistan 1952  8425333      Asia  28.801   779.445      8.42533
+> 2 Afghanistan 1957  9240934      Asia  30.332   820.853      9.24093
+> 3 Afghanistan 1962 10267083      Asia  31.997   853.101     10.26708
+> 4 Afghanistan 1967 11537966      Asia  34.020   836.197     11.53797
+> 5 Afghanistan 1972 13079460      Asia  36.088   739.981     13.07946
+> 6 Afghanistan 1977 14880372      Asia  38.438   786.113     14.88037
 > 
 > ~~~
 >
 
 > #### Solution to challenge 2 {.challenge}
 >
-> Refresh your ggplot skills by plotting population in millions against year.
+> Refresh your plotting skills by plotting population in millions against year.
 >
 > 
 > ~~~{.r}
-> ggplot(gapminder, aes(x = year, y = pop_millions)) + geom_point()
+> plot(gapminder$year, gapminder$pop_millions)
 > ~~~
 > 
 > <img src="fig/09-vectorisation-ch2-sol-1.png" title="plot of chunk ch2-sol" alt="plot of chunk ch2-sol" style="display: block; margin: auto;" />
+> 
+> ~~~{.r}
+> countryset <- c('China', 'India', 'Indonesia')
+> y <- gapminder[gapminder$country %in% countryset, ]
+> plot(y$year, y$pop_millions)
+> ~~~
+> 
+> <img src="fig/09-vectorisation-ch2-sol-2.png" title="plot of chunk ch2-sol" alt="plot of chunk ch2-sol" style="display: block; margin: auto;" />
 >
 
 > #### Solution to challenge 3 {.challenge}
@@ -268,10 +315,10 @@ m * -1
 >
 > 
 > ~~~{.output}
->           [,1]      [,2]      [,3]       [,4]
-> [1,] 1.0000000 0.2500000 0.1428571 0.10000000
-> [2,] 0.5000000 0.2000000 0.1250000 0.09090909
-> [3,] 0.3333333 0.1666667 0.1111111 0.08333333
+>          [,1]     [,2]     [,3]      [,4]
+> [1,] 1.000000 0.250000 0.142857 0.1000000
+> [2,] 0.500000 0.200000 0.125000 0.0909091
+> [3,] 0.333333 0.166667 0.111111 0.0833333
 > 
 > ~~~
 >
@@ -298,7 +345,7 @@ m * -1
 > ~~~
 >
 
-> #### Bonus Challenge {.challenge}
+> ####  Challenge 4 {.challenge}
 >
 > We're interested in looking at the sum of the
 > following sequence of fractions:
@@ -315,11 +362,34 @@ m * -1
 >
 > 
 > ~~~{.r}
+> sum(1/(1:100)^2)
+> ~~~
+> 
+> 
+> 
+> ~~~{.output}
+> [1] 1.63498
+> 
+> ~~~
+> 
+> 
+> 
+> ~~~{.r}
+> sum(1/(1:1e04)^2)
+> ~~~
+> 
+> 
+> 
+> ~~~{.output}
+> [1] 1.64483
+> 
+> ~~~
+> 
+> 
+> 
+> ~~~{.r}
 > inverse_sum_of_squares <- function(n) {
->   sequence <- 1:n
->   y <- 1/(sequence^2)
->   result <- sum(y)
->   return(result)
+>   sum(1/(1:n)^2)
 > }
 > inverse_sum_of_squares(100)
 > ~~~
@@ -327,7 +397,7 @@ m * -1
 > 
 > 
 > ~~~{.output}
-> [1] 1.634984
+> [1] 1.63498
 > 
 > ~~~
 > 
@@ -340,7 +410,8 @@ m * -1
 > 
 > 
 > ~~~{.output}
-> [1] 1.644834
+> [1] 1.64483
 > 
 > ~~~
 >
+
