@@ -174,7 +174,7 @@ m * -1
 
 > #### Solution to challenge 2 {.challenge}
 >
-> Refresh your ggplot skills by plotting population in millions against year.
+> Refresh your plotting skills by plotting population in millions against year.
 >
 > ```{r ch2-sol}
 > plot(gapminder$year, gapminder$pop_millions)

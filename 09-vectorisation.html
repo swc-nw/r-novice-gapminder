@@ -38,7 +38,7 @@
 </ul>
 </div>
 </section>
-<p>One of the nice features of R is that most of its functions are vectorised, that is the function will operate on all elements of a vector without needing to loop through and act on each element one at a time. This makes writing code more concise, easy to read, and less error prone.</p>
+<p>Most of R’s functions are vectorised, meaning that the function will operate on all elements of a vector without needing to loop through and act on each element one at a time. This makes writing code more concise, easy to read, and less error prone.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">4</span>
 x *<span class="st"> </span><span class="dv">2</span></code></pre></div>
 <pre class="output"><code>[1] 2 4 6 8
@@ -69,15 +69,17 @@ y:<span class="st">  </span><span class="dv">6</span>  <span class="dv">7</span>
 <h4 id="challenge-2"><span class="glyphicon glyphicon-pencil"></span>Challenge 2</h4>
 </div>
 <div class="panel-body">
-<p>Refresh your ggplot skills by plotting population in millions against year.</p>
+<p>On a single graph, plot population, in millions, against year, for all countries. Don’t worry about identifying which country is which.</p>
+<p>Repeat the exercise, graphing only for China, India, and Indonesia. Again, don’t worry about which is which.</p>
 </div>
 </section>
-<p>Comparison operators also apply element-wise, as we saw in the subsetting lesson:</p>
+<p>Comparison operators, logical operators, and many function are also vectorized:</p>
+<p><strong>Comparison operators</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &gt;<span class="st"> </span><span class="dv">2</span></code></pre></div>
 <pre class="output"><code>[1] FALSE FALSE  TRUE  TRUE
 </code></pre>
-<p>Logical operations are also vectorised:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span>x &gt;<span class="st"> </span><span class="dv">3</span>
+<p><strong>Logical operators</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span>x &gt;<span class="st"> </span><span class="dv">3</span>  <span class="co"># or, for clarity, a &lt;- (x &gt; 3)</span>
 a</code></pre></div>
 <pre class="output"><code>[1] FALSE FALSE FALSE  TRUE
 </code></pre>
@@ -89,14 +91,15 @@ a</code></pre></div>
 <p><code>any()</code> will return <code>TRUE</code> if any element of a vector is <code>TRUE</code> <code>all()</code> will return <code>TRUE</code> if <em>all</em> elements of a vector are <code>TRUE</code></p>
 </div>
 </aside>
-<p>Many functions also operate on element-wise on vectors:</p>
+<p>Most functions are lso operate on element-wise on vectors:</p>
+<p><strong>Functions</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">4</span>
 <span class="kw">log</span>(x)</code></pre></div>
 <pre class="output"><code>[1] 0.0000000 0.6931472 1.0986123 1.3862944
 </code></pre>
-<p>Vectorised operations also work element wise on matrices:</p>
+<p>Vectorised operations work element-wise on matrices:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">12</span>, <span class="dt">nrow=</span><span class="dv">3</span>, <span class="dt">ncol=</span><span class="dv">4</span>)
-m *<span class="st"> </span>-<span class="dv">1</span></code></pre></div>
+m *<span class="st"> </span>-<span class="dv">1</span>  </code></pre></div>
 <pre class="output"><code>     [,1] [,2] [,3] [,4]
 [1,]   -1   -4   -7  -10
 [2,]   -2   -5   -8  -11
@@ -107,7 +110,17 @@ m *<span class="st"> </span>-<span class="dv">1</span></code></pre></div>
 <h4 id="tip-element-wise-vs.matrix-multiplication"><span class="glyphicon glyphicon-pushpin"></span>Tip: element-wise vs. matrix multiplication</h4>
 </div>
 <div class="panel-body">
-<p>Note that <code>*</code> gives you element-wise multiplication! To do matrix multiplication, we need to use the <code>%*%</code> operator:</p>
+<p>Very important: the operator <code>*</code> gives you element-wise multiplication! To do matrix multiplication, we need to use the <code>%*%</code> operator:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m %*%<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>, <span class="dt">nrow=</span><span class="dv">4</span>, <span class="dt">ncol=</span><span class="dv">1</span>)</code></pre></div>
+<pre class="output"><code>     [,1]
+[1,]   22
+[2,]   26
+[3,]   30
+</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">4</span>, <span class="dt">nrow=</span><span class="dv">1</span>) %*%<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">4</span>, <span class="dt">ncol=</span><span class="dv">1</span>)</code></pre></div>
+<pre class="output"><code>     [,1]
+[1,]   30
+</code></pre>
 <p>For more on matrix algebra, see the <a href="http://www.statmethods.net/advstats/matrix.html">Quick-R reference guide</a></p>
 </div>
 </aside>
@@ -129,18 +142,20 @@ m</code></pre></div>
 <li><code>m ^ -1</code></li>
 <li><code>m * c(1, 0, -1)</code></li>
 <li><code>m &gt; c(0, 20)</code></li>
+<li><code>m * c(1, 0, -1, 2)</code></li>
 </ol>
 <p>Did you get the output expected? If not, ask a helper!</p>
 </div>
 </section>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
-<h4 id="bonus-challenge"><span class="glyphicon glyphicon-pencil"></span>Bonus Challenge</h4>
+<h4 id="challenge-4"><span class="glyphicon glyphicon-pencil"></span>Challenge 4</h4>
 </div>
 <div class="panel-body">
 <p>We’re interested in looking at the sum of the following sequence of fractions:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> x =<span class="st"> </span><span class="dv">1</span>/(<span class="dv">1</span>^<span class="dv">2</span>) +<span class="st"> </span><span class="dv">1</span>/(<span class="dv">2</span>^<span class="dv">2</span>) +<span class="st"> </span><span class="dv">1</span>/(<span class="dv">3</span>^<span class="dv">2</span>) +<span class="st"> </span>... +<span class="st"> </span><span class="dv">1</span>/(n^<span class="dv">2</span>)</code></pre></div>
-<p>This would be tedious to type out, and impossible for high values of n. Can you use vectorisation to solve for x, when n=100? How about when n=10,000?</p>
+<p>This would be tedious to type out, and impossible for high values of n. Use vectorisation to compute x when n=100. What is the sum<br />
+when n=10,000?</p>
 </div>
 </section>
 <h2 id="challenge-solutions">Challenge solutions</h2>
@@ -168,9 +183,13 @@ m</code></pre></div>
 <h4 id="solution-to-challenge-2"><span class="glyphicon glyphicon-pencil"></span>Solution to challenge 2</h4>
 </div>
 <div class="panel-body">
-<p>Refresh your ggplot skills by plotting population in millions against year.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(gapminder, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> pop_millions)) +<span class="st"> </span><span class="kw">geom_point</span>()</code></pre></div>
+<p>Refresh your plotting skills by plotting population in millions against year.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(gapminder$year, gapminder$pop_millions)</code></pre></div>
 <p><img src="fig/09-vectorisation-ch2-sol-1.png" title="plot of chunk ch2-sol" alt="plot of chunk ch2-sol" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">countryset &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;China&#39;</span>, <span class="st">&#39;India&#39;</span>, <span class="st">&#39;Indonesia&#39;</span>)
+y &lt;-<span class="st"> </span>gapminder[gapminder$country %in%<span class="st"> </span>countryset, ]
+<span class="kw">plot</span>(y$year, y$pop_millions)</code></pre></div>
+<p><img src="fig/09-vectorisation-ch2-sol-2.png" title="plot of chunk ch2-sol" alt="plot of chunk ch2-sol" style="display: block; margin: auto;" /></p>
 </div>
 </section>
 <section class="challenge panel panel-success">
@@ -215,17 +234,20 @@ m</code></pre></div>
 </section>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
-<h4 id="bonus-challenge-1"><span class="glyphicon glyphicon-pencil"></span>Bonus Challenge</h4>
+<h4 id="challenge-4-1"><span class="glyphicon glyphicon-pencil"></span>Challenge 4</h4>
 </div>
 <div class="panel-body">
 <p>We’re interested in looking at the sum of the following sequence of fractions:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> x =<span class="st"> </span><span class="dv">1</span>/(<span class="dv">1</span>^<span class="dv">2</span>) +<span class="st"> </span><span class="dv">1</span>/(<span class="dv">2</span>^<span class="dv">2</span>) +<span class="st"> </span><span class="dv">1</span>/(<span class="dv">3</span>^<span class="dv">2</span>) +<span class="st"> </span>... +<span class="st"> </span><span class="dv">1</span>/(n^<span class="dv">2</span>)</code></pre></div>
 <p>This would be tedious to type out, and impossible for high values of n. Can you use vectorisation to solve for x, when n=100? How about when n=10,000?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="dv">1</span>/(<span class="dv">1</span>:<span class="dv">100</span>)^<span class="dv">2</span>)</code></pre></div>
+<pre class="output"><code>[1] 1.634984
+</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="dv">1</span>/(<span class="dv">1</span>:<span class="fl">1e04</span>)^<span class="dv">2</span>)</code></pre></div>
+<pre class="output"><code>[1] 1.644834
+</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">inverse_sum_of_squares &lt;-<span class="st"> </span>function(n) {
-  sequence &lt;-<span class="st"> </span><span class="dv">1</span>:n
-  y &lt;-<span class="st"> </span><span class="dv">1</span>/(sequence^<span class="dv">2</span>)
-  result &lt;-<span class="st"> </span><span class="kw">sum</span>(y)
-  <span class="kw">return</span>(result)
+  <span class="kw">sum</span>(<span class="dv">1</span>/(<span class="dv">1</span>:n)^<span class="dv">2</span>)
 }
 <span class="kw">inverse_sum_of_squares</span>(<span class="dv">100</span>)</code></pre></div>
 <pre class="output"><code>[1] 1.634984
