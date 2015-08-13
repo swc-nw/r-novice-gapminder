@@ -357,7 +357,7 @@ m * -1
 >
 > This would be tedious to type out, and impossible for
 > high values of n.
-> Can you use vectorisation to solve for x, when n=100?
+> Can you use vectorisation to compute x, when n=100?
 > How about when n=10,000?
 >
 > 
