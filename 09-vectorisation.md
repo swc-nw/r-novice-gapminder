@@ -118,7 +118,7 @@ a
 > `all()` will return `TRUE` if *all* elements of a vector are `TRUE`
 >
 
-Most functions are lso operate on element-wise on vectors:
+Most functions also operate element-wise on vectors:
 
 **Functions**
 
