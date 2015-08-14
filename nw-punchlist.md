@@ -13,4 +13,12 @@ tone the issue down to just `data/`  and `scripts/` subdirectories
 
 - On the other hand, `gapminder` is still read by csv when there is now a package.
       
+## RM responses
+
+- I agree. My concern is that suggesting all these packages creates
+  and "all or nothing" appearance that is contrary to the spirit we're
+  trying to foster. Very much agree with "data/" and "scripts/".
+
+- Installing gapminder would be a good initial exercise when we start
+  with R.
 
