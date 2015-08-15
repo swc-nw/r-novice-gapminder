@@ -1,0 +1,82 @@
+---
+title: "GDP Per Capita and Life Expectancy for Three Countries: A Gapminder Exercise"
+author: "Team SWC-NW"
+date: "August 14, 2015"
+output: html_document
+---
+
+```{r setup, echo=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = FALSE)
+library(gapminder)
+```
+
+For selected countries, this document will automatically compute and
+present the growth rate in GDP per capita from 1952 to 2007 and from
+2002 to 2007. It will also plot GDP per capita and life expectancy
+over time.
+
+## China
+
+
+```{r, results='asis', echo=FALSE}
+i <- 'China'
+y <- gapminder[gapminder$country == i, ]
+cat('The growth rate in GDP per capita between 1952 and 2007 for ',
+          i,' was  ')
+cat(format(log(y$gdpPercap[y$year==2007]/
+       y$gdpPercap[y$year==1952])/55*100, digits=3),'%.\n\n', sep='')
+cat('The growth rate in GDP per capita between 2002 and 2007 for ',
+          i,' was  ')
+cat(format(log(y$gdpPercap[y$year==2007]/
+       y$gdpPercap[y$year==2002])/5*100, digits=3),'%.\n\n', sep='')
+cat('.\n\n.')
+plot(y$year, y$gdpPercap/1e03, ylim=c(0, 100),
+     main='GDP per Capita and Life Expectancy',
+     xlab='Year', ylab='GDPPC ($k) and Life expectancy (years)')
+points(y$year, y$lifeExp, pch=2)
+legend('topleft', legend=c('gdpPC', 'LE'), pch=c(1, 2))
+
+```
+
+## India
+
+```{r, results='asis', echo=FALSE}
+i <- 'India'
+y <- gapminder[gapminder$country == i, ]
+cat('The growth rate in GDP per capita between 1952 and 2007 for ',
+          i,' was  ')
+cat(format(log(y$gdpPercap[y$year==2007]/
+       y$gdpPercap[y$year==1952])/55*100, digits=3),'%.\n\n', sep='')
+cat('The growth rate in GDP per capita between 2002 and 2007 for ',
+          i,' was  ')
+cat(format(log(y$gdpPercap[y$year==2007]/
+       y$gdpPercap[y$year==2002])/5*100, digits=3),'%.\n\n', sep='')
+cat('.\n\n.')
+plot(y$year, y$gdpPercap/1e03, ylim=c(0, 100),
+     main='GDP per Capita and Life Expectancy',
+     xlab='Year', ylab='GDPPC ($k) and Life expectancy (years)')
+points(y$year, y$lifeExp, pch=2)
+legend('topleft', legend=c('gdpPC', 'LE'), pch=c(1, 2))
+```
+
+## United States
+
+```{r, results='asis', echo=FALSE}
+i <- 'United States'
+y <- gapminder[gapminder$country == i, ]
+cat('The growth rate in GDP per capita between 1952 and 2007 for ',
+          i,' was  ')
+cat(format(log(y$gdpPercap[y$year==2007]/
+       y$gdpPercap[y$year==1952])/55*100, digits=3),'%.\n\n', sep='')
+cat('The growth rate in GDP per capita between 2002 and 2007 for ',
+          i,' was  ')
+cat(format(log(y$gdpPercap[y$year==2007]/
+       y$gdpPercap[y$year==2002])/5*100, digits=3),'%.\n\n', sep='')
+plot(y$year, y$gdpPercap/1e03, ylim=c(0, 100),
+     main='GDP per Capita and Life Expectancy',
+     xlab='Year', ylab='GDPPC ($k) and Life expectancy (years)')
+points(y$year, y$lifeExp, pch=2)
+legend('topleft', legend=c('gdpPC', 'LE'), pch=c(1, 2))
+```
+

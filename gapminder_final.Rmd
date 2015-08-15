@@ -1,0 +1,54 @@
+---
+title: "GDP Per Capita and Life Expectancy by Country: A Gapminder Exercise"
+author: "Team SWC-NW"
+date: "August 14, 2015"
+output:     
+    html_document:
+        toc: true
+---
+
+This is undoubtedly overkill but it certainly illustrates the power of R and markdown!
+
+```{r setup, echo=FALSE}
+library(knitr)
+knitr::opts_chunk$set(echo = FALSE)
+library(gapminder)
+```
+For selected countries, this document will automatically compute and
+present the growth rate in GDP per capita from 1952 to 2007 and from
+2002 to 2007. It will also plot GDP per capita and life expectancy
+over time.
+
+```{r, echo=FALSE}
+growthrate <- function(country, firstyr, lastyr) {
+    y <- gapminder[gapminder$country == country, ]
+    cat('The growth rate in GDP per capita in ', country, ' between ', 
+        firstyr, ' and ', lastyr, ' was ', sep='')
+    cat(format(log(y$gdpPercap[y$year==lastyr]/
+        y$gdpPercap[y$year==firstyr])/(lastyr-firstyr)*100, 
+        digits=3),'%.\n\n', sep='')
+}
+
+plotgrowthle <- function(country) {
+    y <- gapminder[gapminder$country == country, ]
+    plot(y$year, y$gdpPercap/1e03, ylim=c(0, 100),
+         main='GDP per Capita and Life Expectancy',
+         xlab='Year', ylab='GDPPC ($k) and Life expectancy (years)')
+    points(y$year, y$lifeExp, pch=2)
+    legend('topleft', legend=c('gdpPC', 'LE'), pch=c(1, 2))
+}
+
+```
+
+
+```{r, results='asis', echo=FALSE}
+for (i in sort(unique(gapminder$country))) {
+    cat('\n\n')
+    cat('## ', i)
+    cat('\n\n')
+    y <- gapminder[gapminder$country == i, ]
+    growthrate(i, 1952, 2007)
+    growthrate(i, 2002, 2007)
+    plotgrowthle(i)
+}
+
