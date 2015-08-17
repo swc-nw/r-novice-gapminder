@@ -71,18 +71,13 @@
 <li>This is great way to start; all your code is saved for later</li>
 <li>You will be able to run the file you create from within RStudio or using R’s <code>source()</code> function.</li>
 </ul>
-<aside class="callout panel panel-info">
-<div class="panel-heading">
-<h4 id="tip-running-segments-of-your-code"><span class="glyphicon glyphicon-pushpin"></span>Tip: Running segments of your code</h4>
-</div>
-<div class="panel-body">
-<p>RStudio offers you great flexibility in running code from within the editor window. There are buttons, menu choices, and keyboard shortcuts. To run the current line, you can 1. click on the <code>Run</code> button just above the editor panel, or 2. select “Run Lines” from the “Code” menu, or 3. hit Ctrl-Enter in Windows or Linux or Command-Enter on OS X. (This shortcut can also be seen by hovering the mouse over the button).</p>
-<p>To run a block of code, select it and then <code>Run</code>. If you have modified a line of code within a block of code you have just run. There is no need to reselct the section and <code>Run</code>, you can use the next button along, <code>Re-run the previous region</code>. This will run the previous code block inculding the modifications you have made.</p>
-</div>
-</aside>
+<blockquote>
+<h4 id="tip-running-segments-of-your-code-.callout-rstudio-offers">Tip: Running segments of your code {.callout} RStudio offers</h4>
+<p>you great flexibility in running code from within the editor window. There are buttons, menu choices, and keyboard shortcuts. To run the current line, you can 1. click on the <code>Run</code> button just above the editor panel, or 2. select “Run Lines” from the “Code” menu, or 3. hit Ctrl-Enter in Windows or Linux or Command-Enter on OS X. (This shortcut can also be seen by hovering the mouse over the button). To run a block of code, select it and then <code>Run</code>. If you have modified a line of code within a block of code you have just run, there is no need to reselct the section and <code>Run</code>, you can use the next button along, <code>Re-run the previous region</code>. This will run the previous code block inculding the modifications you have made.</p>
+</blockquote>
 <h3 id="introduction-to-r">Introduction to R</h3>
 <p>A lot of your time in R will be spent in the R interactive console. This is where you will run all of your code, and can be a useful environment to try out ideas before adding them to an R script file. This console in RStudio is the same as the one you would get if you just typed in <code>R</code> in your commandline environment.</p>
-<p>The first thing you will see in the R interactive session is a bunch of information, followed by a “&gt;” and a blinking cursor. In many ways this is similar to the shell environment you learnt about during the shell lessons: it operates on the same idea of a “Read, evaluate, print loop”: you type in commands, R tries to execute them, and then returns a result.</p>
+<p>The first thing you will see in the R interactive session is a bunch of information, followed by a “&gt;” and a blinking cursor. In many ways this is similar to the shell environment you learned about during the shell lessons: it operates on the same idea of a “Read, evaluate, print loop”: you type in commands, R tries to execute them, and then returns a result.</p>
 <h4 id="using-r-as-a-calculator">Using R as a calculator</h4>
 <p>The simplest thing you could do with R is do arithmetic:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span> +<span class="st"> </span><span class="dv">100</span></code></pre></div>
@@ -105,7 +100,7 @@
 <p>When using R as a calculator, the order of operations is the same as you would have learnt back in school.</p>
 <p>From highest to lowest precedence:</p>
 <ul>
-<li>Brackets: <code>(</code>, <code>)</code></li>
+<li>Parentheses: <code>(</code>, <code>)</code></li>
 <li>Exponents: <code>^</code> or <code>**</code></li>
 <li>Divide: <code>/</code></li>
 <li>Multiply: <code>*</code></li>
@@ -115,7 +110,7 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">3</span> +<span class="st"> </span><span class="dv">5</span> *<span class="st"> </span><span class="dv">2</span></code></pre></div>
 <pre class="output"><code>[1] 13
 </code></pre>
-<p>Use brackets (actually parentheses) to group to force the order of evaluation if it differs from the default, or to set your own order.</p>
+<p>Use parentheses to group operations in order to force the order of evaluation if it differs from the default, or to make clear what you intend.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dv">3</span> +<span class="st"> </span><span class="dv">5</span>) *<span class="st"> </span><span class="dv">2</span></code></pre></div>
 <pre class="output"><code>[1] 16
 </code></pre>
@@ -123,7 +118,7 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(<span class="dv">3</span> +<span class="st"> </span>(<span class="dv">5</span> *<span class="st"> </span>(<span class="dv">2</span> ^<span class="st"> </span><span class="dv">2</span>))) <span class="co"># hard to read</span>
 <span class="dv">3</span> +<span class="st"> </span><span class="dv">5</span> *<span class="st"> </span><span class="dv">2</span> ^<span class="st"> </span><span class="dv">2</span>       <span class="co"># clear, if you remember the rules</span>
 <span class="dv">3</span> +<span class="st"> </span><span class="dv">5</span> *<span class="st"> </span>(<span class="dv">2</span> ^<span class="st"> </span><span class="dv">2</span>)     <span class="co"># if you forget some rules, this might help</span></code></pre></div>
-<p>The text I’ve typed after each line of code is called a comment. Anything that follows on from the hash (or octothorpe) symbol <code>#</code> is ignored by R when it executes code.</p>
+<p>The text after each line of code is called a comment. Anything that follows after the hash (or octothorpe) symbol <code>#</code> is ignored by R when it executes code.</p>
 <p>Really small or large numbers get a scientific notation:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">2</span>/<span class="dv">10000</span></code></pre></div>
 <pre class="output"><code>[1] 2e-04
@@ -134,7 +129,7 @@
 <pre class="output"><code>[1] 5000
 </code></pre>
 <h4 id="mathematical-functions">Mathematical functions</h4>
-<p>R has many built in mathematical functions. To call a function, we simply type its name, follow by and open and closing bracket. Anything we type inside those brackets is called the function’s arguments:</p>
+<p>R has many built in mathematical functions. To call a function, we simply type its name, follow by and open and closing parenthesis. Anything we type inside the parentheses is called the function’s arguments:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sin</span>(<span class="dv">1</span>)  <span class="co"># trigonometry functions</span></code></pre></div>
 <pre class="output"><code>[1] 0.841471
 </code></pre>
@@ -236,7 +231,7 @@
 <p>Just like in the shell, <code>ls</code> will hide any variables or functions starting with a “.” by default. To list all objects, type <code>ls(all.names=TRUE)</code> instead</p>
 </div>
 </aside>
-<p>Note here that we didn’t given any arguments to <code>ls</code>, but we still needed to give the brackets to tell R to call the function.</p>
+<p>Note here that we didn’t given any arguments to <code>ls</code>, but we still needed to give the parentheses to tell R to call the function.</p>
 <p>If we type <code>ls</code> by itself, R will print out the source code for that function!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ls</code></pre></div>
 <pre class="output"><code>function (name, pos = -1L, envir = as.environment(pos), all.names = FALSE, 
@@ -270,14 +265,14 @@
     }
     else all.names
 }
-&lt;bytecode: 0x265a398&gt;
+&lt;bytecode: 0x2a72f88&gt;
 &lt;environment: namespace:base&gt;
 </code></pre>
 <p>You can use <code>rm</code> to delete objects you no longer need:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(x)</code></pre></div>
 <p>If you have lots of things in your environment and want to delete all of them, you can pass the results of <code>ls</code> to the <code>rm</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>())</code></pre></div>
-<p>In this case we’ve combined the two. Just like the order of operations, anything inside the innermost brackets is evaluated first, and so on.</p>
+<p>In this case we’ve combined the two. Just like the order of operations, anything inside the innermost parentheses is evaluated first, and so on.</p>
 <p>In this case we’ve specified that the results of <code>ls</code> should be used for the <code>list</code> argument in <code>rm</code>. When assigning values to arguments by name, you <em>must</em> use the <code>=</code> operator!!</p>
 <p>If instead we use <code>&lt;-</code>, there will be unintended side effects, or you may just get an error message:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(list &lt;-<span class="st"> </span><span class="kw">ls</span>())</code></pre></div>
@@ -292,6 +287,15 @@
 <p>In both cases, the message that R prints out usually give you clues how to fix a problem.</p>
 </div>
 </aside>
+<h4 id="r-packages">R Packages</h4>
+<p>It is possible to add functions to R by writing a package, or by obtaining a package written by someone else. As of this writing, there are over 7,000 packages available on CRAN (the comprehensive R archive network). R and RStudio have functionality for managing packages:</p>
+<ul>
+<li>You can see what packages are installed by typing <code>installed.packages()</code></li>
+<li>You can install packages by typing <code>install.packages(&quot;packagename&quot;)</code>, where <code>packagename</code> is the package name, in quotes.</li>
+<li>You can update installed packages by typing <code>update.packages()</code></li>
+<li>You can remove a package with <code>remove.packages(&quot;packagename&quot;)</code></li>
+<li>You can make a package available for use with <code>library(packagename)</code></li>
+</ul>
 <section class="challenge panel panel-success">
 <div class="panel-heading">
 <h4 id="challenge-1"><span class="glyphicon glyphicon-pencil"></span>Challenge 1</h4>
@@ -318,6 +322,14 @@ age &lt;-<span class="st"> </span>age -<span class="st"> </span><span class="dv"
 </div>
 <div class="panel-body">
 <p>Clean up your working environment by deleting the mass and age variables.</p>
+</div>
+</section>
+<section class="challenge panel panel-success">
+<div class="panel-heading">
+<h4 id="challenge-4"><span class="glyphicon glyphicon-pencil"></span>Challenge 4</h4>
+</div>
+<div class="panel-body">
+<p>Install the following packages: <code>ggplot2</code>, <code>plyr</code>, <code>gapminder</code></p>
 </div>
 </section>
         </div>
