@@ -92,9 +92,16 @@ x</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="dv">0</span>]</code></pre></div>
 <pre class="output"><code>named numeric(0)
 </code></pre>
-<p>But what about negative values?</p>
+<aside class="callout panel panel-info">
+<div class="panel-heading">
+<h4 id="tip-vector-numbering-in-r-starts-at-1"><span class="glyphicon glyphicon-pushpin"></span>Tip: Vector numbering in R starts at 1</h4>
+</div>
+<div class="panel-body">
+<p>In many programming languages (C and python, for example), the first element of a vector has an index of 0. In R, the first element is 1.</p>
+</div>
+</aside>
 <h3 id="skipping-and-removing-elements">Skipping and removing elements</h3>
-<p>If we use a negative number, R will return every element <em>except</em> for the one specified:</p>
+<p>If we use a negative number as the index of a vector, R will return every element <em>except</em> for the one specified:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[-<span class="dv">2</span>]</code></pre></div>
 <pre class="output"><code>  a   c   d   e 
 5.4 7.1 4.8 7.5 
@@ -174,13 +181,38 @@ x</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which</span>(<span class="kw">names</span>(x) ==<span class="st"> &quot;a&quot;</span>)</code></pre></div>
 <pre class="output"><code>[1] 1
 </code></pre>
-<p>Only the first element is <code>TRUE</code>, so `which returns 1. Now that we have indices the skipping works because we have a negative index!</p>
+<p>Only the first element is <code>TRUE</code>, so <code>which</code> returns 1. Now that we have indices the skipping works because we have a negative index!</p>
 <p>Skipping multiple named indices is similar, but uses a different comparison operator:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[-<span class="kw">which</span>(<span class="kw">names</span>(x) %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;c&quot;</span>))]</code></pre></div>
 <pre class="output"><code>  b   d   e 
 6.2 4.8 7.5 
 </code></pre>
 <p>The <code>%in%</code> goes through each element of its left argument, in this case the names of <code>x</code>, and asks, “Does this element occur in the second argument?”.</p>
+<aside class="callout panel panel-info">
+<div class="panel-heading">
+<h4 id="tip-non-unique-names"><span class="glyphicon glyphicon-pushpin"></span>Tip: Non-unique names</h4>
+</div>
+<div class="panel-body">
+<p>It is possible for multiple elements in a vector to have the same name. For example:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="dv">1</span>:<span class="dv">3</span>
+x</code></pre></div>
+<pre class="output"><code>[1] 1 2 3
+</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(x) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;a&#39;</span>, <span class="st">&#39;a&#39;</span>)  
+x</code></pre></div>
+<pre class="output"><code>a a a 
+1 2 3 
+</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="st">&#39;a&#39;</span>]</code></pre></div>
+<pre class="output"><code>a 
+1 
+</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="kw">which</span>(<span class="kw">names</span>(x) ==<span class="st"> &#39;a&#39;</span>)]</code></pre></div>
+<pre class="output"><code>a a a 
+1 2 3 
+</code></pre>
+</div>
+</aside>
 <aside class="callout panel panel-info">
 <div class="panel-heading">
 <h4 id="tip-getting-help-for-operators"><span class="glyphicon glyphicon-pushpin"></span>Tip: Getting help for operators</h4>
@@ -195,9 +227,9 @@ x</code></pre></div>
 <pre class="output"><code>Warning in names(x) == c(&quot;a&quot;, &quot;c&quot;): longer object length is not a multiple
 of shorter object length
 </code></pre>
-<pre class="output"><code>[1]  TRUE FALSE FALSE FALSE FALSE
+<pre class="output"><code>[1]  TRUE FALSE  TRUE
 </code></pre>
-<p>Obviously “c” is in the names of <code>x</code>, so why didn’t this work? <code>==</code> works slightly differently to <code>%in%</code>. It will compare each element of its left argument to the corresponding element of its right argument.</p>
+<p>Obviously “c” is in the names of <code>x</code>, so why didn’t this work? <code>==</code> works slightly differently than <code>%in%</code>. It will compare each element of its left argument to the corresponding element of its right argument.</p>
 <p>Here’s a mock illustration:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;e&quot;</span>)  <span class="co"># names of x</span>
    |<span class="st">    </span><span class="er">|</span><span class="st">    </span><span class="er">|</span><span class="st">    </span><span class="er">|</span><span class="st">    </span><span class="co"># The elements == is comparing</span>
@@ -208,27 +240,23 @@ of shorter object length
 <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;c&quot;</span>)</code></pre></div>
 <p>In this case R simply repeats <code>c(&quot;a&quot;, &quot;c&quot;)</code> twice. If the longer vector length isn’t a multiple of the shorter vector length, then R will also print out a warning message:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(x) ==<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;e&#39;</span>)</code></pre></div>
-<pre class="output"><code>Warning in names(x) == c(&quot;a&quot;, &quot;c&quot;, &quot;e&quot;): longer object length is not a
-multiple of shorter object length
-</code></pre>
-<pre class="output"><code>[1]  TRUE FALSE FALSE FALSE FALSE
+<pre class="output"><code>[1]  TRUE FALSE FALSE
 </code></pre>
 <p>This difference between <code>==</code> and <code>%in%</code> is important to remember, because it can introduce hard to find and subtle bugs!</p>
 <h3 id="subsetting-through-other-logical-operations">Subsetting through other logical operations</h3>
 <p>We can also more simply subset through logical operations:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">FALSE</span>)]</code></pre></div>
-<pre class="output"><code>  a   b   e 
-5.4 6.2 7.5 
+<pre class="output"><code>a a 
+1 2 
 </code></pre>
 <p>Note that in this case, the logical vector is also recycled to the length of the vector we’re subsetting!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[<span class="kw">c</span>(<span class="ot">TRUE</span>, <span class="ot">FALSE</span>)]</code></pre></div>
-<pre class="output"><code>  a   c   e 
-5.4 7.1 7.5 
+<pre class="output"><code>a a 
+1 3 
 </code></pre>
 <p>Since comparison operators evaluate to logical vectors, we can also use them to succinctly subset vectors:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x[x &gt;<span class="st"> </span><span class="dv">7</span>]</code></pre></div>
-<pre class="output"><code>  c   e 
-7.1 7.5 
+<pre class="output"><code>named integer(0)
 </code></pre>
 <aside class="callout panel panel-info">
 <div class="panel-heading">
@@ -340,6 +368,12 @@ m[<span class="dv">3</span>:<span class="dv">4</span>, <span class="kw">c</span>
 <pre class="output"><code>     [,1] [,2] [,3]
 [1,]    1    3    5
 [2,]    2    4    6
+</code></pre>
+<p>If you wish to populate the matrix by row, use <code>byrow=TRUE</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix</span>(<span class="dv">1</span>:<span class="dv">6</span>, <span class="dt">nrow=</span><span class="dv">2</span>, <span class="dt">ncol=</span><span class="dv">3</span>, <span class="dt">byrow=</span><span class="ot">TRUE</span>)</code></pre></div>
+<pre class="output"><code>     [,1] [,2] [,3]
+[1,]    1    2    3
+[2,]    4    5    6
 </code></pre>
 <p>Matrices can also be subsetted using their rownames and column names instead of their row and column indices.</p>
 <section class="challenge panel panel-success">
