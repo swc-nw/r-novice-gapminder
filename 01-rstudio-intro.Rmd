@@ -54,7 +54,7 @@ a .R file to run later.
 2. Start writing in an .R file and use Rstudio's command / short cut
 to push current line, selected lines or modified lines to the
 interactive R console. 
-   * This is great way to start; all your code is saved for later
+   * This is a great way to start; all your code is saved for later
    * You will be able to run the file you create from within RStudio
    or using R's `source()`  function.
 
@@ -160,7 +160,7 @@ Remember that others may later read your code.
 
 
 The text after each line of code is called a
-comment. Anything that follows after the hash (or octothorpe) symbol
+"comment". Anything that follows after the hash (or octothorpe) symbol
 `#` is ignored by R when it executes code.
 
 Really small or large numbers get a scientific notation:
@@ -181,7 +181,7 @@ You can write numbers in scientific notation too:
 #### Mathematical functions
 
 R has many built in mathematical functions. To call a function,
-we simply type its name, follow by and open and closing parenthesis.
+we simply type its name, followed by  open and closing parentheses.
 Anything we type inside the parentheses is called the function's
 arguments:
 
